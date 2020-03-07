@@ -1,0 +1,9 @@
+<form>
+    <mat-form-field>
+        <mat-label>Nombre:</mat-label>
+        <input id="name" name="name" type="text" [(ngModel)]="nameInput" matInput>
+    </mat-form-field>
+    <button mat-button (click)="onCreate()">Crear</button>
+    <button mat-button color="warn"
+    (click)="onCancel()">Cancelar</button>
+</form>

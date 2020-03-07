@@ -1,0 +1,44 @@
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.container {
+    padding: 40px 10px;
+}
+
+aside {
+    background-color: rgb(50, 50, 50);
+    padding: 20px 40px 20px 40px;
+}
+
+@media screen and (min-width: 1px) {
+    .container-row {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    aside {
+        margin: 0;
+        border-radius: 0;
+    }
+}
+ 
+@media screen and (min-width: 960px) {
+    .container-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    aside {
+        margin: 30px 0px 30px 50px;
+        border-radius: 3px 0 0 3px;
+    }
+}
+
+
+/*** toolbar ***/
+mat-toolbar {
+    background-color: rgb(50, 50, 50);
+}
+.spacer {
+    flex: 1 1 auto;
+}

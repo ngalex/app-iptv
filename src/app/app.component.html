@@ -1,0 +1,57 @@
+<div class="container-column">
+    <header class = "column-item">
+        <app-mod-header></app-mod-header>
+    </header>
+    <div class = "column-item container-row">
+        <section class="container container-column row-item-60">
+            <mat-toolbar>
+                <button mat-button [disabled] = '!enableEditChannel' (click)="enableEditChannel = false">
+                    <mat-icon>arrow_back</mat-icon></button>
+                <span class="spacer"></span>
+                <button mat-button *ngIf="!enableEditChannel; else addAction" 
+                [disabled] = "enableCreatePlaylist"
+                (click)="enableCreatePlaylist = true"
+                ><mat-icon>playlist_add</mat-icon>Agregar Lista</button>
+                <ng-template #addAction>
+                    <button mat-button
+                    (click)="enableCreateChannel = true"><mat-icon>add</mat-icon>Agregar Canal</button>
+                </ng-template>
+            </mat-toolbar>
+            <app-mod-iptv-list (enableChannelEditor) = "enableEditChannel = $event" [hidden] = "enableEditChannel"
+                                (enablePlaylistEditor) = "enableEditPlaylist = $event"
+                                ></app-mod-iptv-list>
+            <app-channel-editor [hidden] = "!enableEditChannel"
+                                ></app-channel-editor>
+        </section>
+        <aside class = "row-item-40">
+            <section *ngIf="!enableEditPlaylist && !enableCreatePlaylist && !enableCreateChannel">
+                <p>Selecciones una lista</p>
+                <p>Editar: Modificar aspectos de la lista.</p>
+                <p>Gestionar: Ver y Modificar el listado de canales de la lista.</p>
+                <p>Info: Mostrar información de la lista.</p>
+                <p><mat-icon>cloud_download</mat-icon>: Descargar la lista en .m3u</p>
+            </section>
+            <app-list-editor *ngIf="enableEditPlaylist" 
+            (disablePlaylistEditor) = "enableEditPlaylist = $event"></app-list-editor>
+            <app-list-create *ngIf="enableCreatePlaylist" 
+            (disablePlaylistCreator)="enableCreatePlaylist = $event"></app-list-create>
+            <app-channel-create *ngIf="enableCreateChannel"
+            (disableChannelCreator)= "enableCreateChannel = $event"></app-channel-create>
+        </aside>
+    </div>
+    <footer class = "column-item">
+        <app-mod-footer></app-mod-footer>
+    </footer>
+</div>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+
+
+<router-outlet></router-outlet>

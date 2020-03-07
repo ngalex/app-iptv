@@ -1,0 +1,19 @@
+* {
+    color: #cecece;
+}
+
+/*** Channel List ***/ 
+.channel-tittle {
+    font-weight: 500;
+    color: #ececec;
+}
+.urlContainer {
+    font-size: 0.8em;
+}
+button.mat-stroked-button,
+button.mat-button {
+     margin: 1%;
+}
+mat-divider{
+    border-top-color: rgb(60, 60, 60);
+}

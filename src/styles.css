@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { background-color: rgb(30,30,30); margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container-column{
+    display: flex;
+    flex-direction: column;
+}
+.container-row{
+    display: flex;
+    flex-direction: row;
+}
+.container-wrap{
+    flex-wrap: wrap;
+}
+
+.row-item {
+    flex: auto;
+}
+.row-item-10{
+    flex: 10%;
+}
+.row-item-20{
+    flex: 20%;
+}
+.row-item-40{
+    flex: 20%;
+}
+.row-item-50{
+    flex: 50%;
+}
+.row-item-60{
+    flex: 60%;
+}
+.row-item-80{
+    flex: 80%;
+}
+.column-item{
+    flex: auto;
+}

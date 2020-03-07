@@ -1,0 +1,18 @@
+<mat-list>
+    <mat-list-item *ngFor="let playlist of playlists">
+        <span class="playlist-name-style" matLine>{{playlist.Name}}</span>
+        <span class="playlist-description" matLine> Cantidad de canales canales: {{playlist.Items}}</span>
+        <button mat-raised-button color="primary">Info</button>
+        <button class="mat-button-config" mat-raised-button color="accent"
+        (click)="onEditPlaylist(playlist)">
+        Editar</button>
+        <button mat-raised-button color="warn" 
+        (click)="onEditChannel(playlist)">Abrir</button>
+        <button class="mat-button-config" mat-raised-button>
+            <mat-icon>cloud_download</mat-icon>
+        </button>
+        <button mat-button>
+            <mat-icon color="warn">delete</mat-icon>
+        </button>
+    </mat-list-item>
+</mat-list>
