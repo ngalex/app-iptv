@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Playlist } from './models/Playlist';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'home',
@@ -12,4 +13,10 @@ export class AppComponent {
   public enableCreateChannel: boolean = false;
   public enableEditPlaylist: boolean = false;
   public enableCreatePlaylist: boolean = false;
+
+  constructor(private router: Router) { }
+
+  isHome(): boolean {
+    if (this.router.routerState.snapshot.url == "/playlists") return true; else return false;
+  }
 }

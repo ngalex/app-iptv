@@ -1,12 +1,13 @@
 .mat-button-config{
     margin: 1%;
 }
+.mat-input-resize {
+    font-size: 0.8em;
+}
 .playlist-name-style{
     font-weight: 500 !important;
-    color: #ececec;
 }
 .playlist-description {
     font-weight: lighter !important;
-    color: #cecece;
     font-size: 0.8em !important;
 }

@@ -3,6 +3,7 @@ import { Channel } from '../../models/Channel';
 import { ChannelService } from 'src/app/services/channel/channel.service';
 import { PlaylistService } from 'src/app/services/playlist/playlist.service';
 import { Playlist } from 'src/app/models/Playlist';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-channel-editor',
@@ -14,32 +15,33 @@ export class ChannelEditorComponent implements OnInit {
   public channels: Channel[];
   public selectedChannel: number = null;
   public enableEdit: boolean = false;
+  public index: number;
 
-  constructor(private plService: PlaylistService, private chnService: ChannelService) {
-    this.plService.sendPlaylist.subscribe ((pl:Playlist) => {
-      this.selectedPlaylist = pl;
-      this.loadChannels();
-    });  
-  }
+  constructor(private plService: PlaylistService,
+    private chnService: ChannelService,
+    private router: Router,
+    private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.channels = [];
+    this.index = this.route.snapshot.params['id'];
+    this.loadChannels();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  isEnabledCreating(): boolean{
+    if(this.router.routerState.snapshot.url == "/edit") return true; else return false;
   }
 
-  onAdd(channel: Channel): void{
+  onAdd(channel: Channel): void {
     this.chnService.addChannel(channel);
   }
 
-  loadChannels(){
+  loadChannels() {
     this.channels = [];
-    if(this.selectedPlaylist.Id > -1 && this.selectedPlaylist.Id != null)
+    if (this.index != null)
       this.chnService.channelsSource.forEach(channel => {
-        if (channel.IdPlaylist == this.selectedPlaylist.Id) this.channels.push(channel);
+        if (channel.IdPlaylist == this.index) this.channels.push(channel);
       });
-    
   }
 
   onEnableEdition(i: number): void {
@@ -54,7 +56,7 @@ export class ChannelEditorComponent implements OnInit {
     this.enableEdit = false;
   }
 
-  onRemove(id: number){
+  onRemove(id: number) {
     this.chnService.removeChannel(id);
   }
 

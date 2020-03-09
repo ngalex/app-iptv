@@ -11,21 +11,36 @@ import { PlaylistService } from 'src/app/services/playlist/playlist.service';
 export class ModIptvListComponent implements OnInit {
   @Output() enableChannelEditor = new EventEmitter<boolean>();
   @Output() enablePlaylistEditor = new EventEmitter<boolean>();
+  public selectedPlaylist: number;
+  public nameInput: string;
+  public enableEdit: boolean; 
   public playlists: Playlist[];
 
-  constructor(private plService: PlaylistService) {
+  constructor(private plService: PlaylistService,
+              private router: Router) {
     this.playlists = this.plService.playlistSource;    
   }
 
   onEditPlaylist(pl: Playlist):void {
-    this.enablePlaylistEditor.emit(true);
-    this.plService.sendPlaylist.emit(pl);
-    this.enableChannelEditor.emit(false);
+    this.onSelectPlaylist(pl.Id);
+    this.nameInput = pl.Name;
+    this.enableEdit = true;
   }
   onEditChannel(pl: Playlist):void{
     this.plService.sendPlaylist.emit(pl);
     this.enablePlaylistEditor.emit(false);
     this.enableChannelEditor.emit(true);
+    this.router.navigate(['playlists/'+pl.Id]);
+  }
+
+  onSelectPlaylist(id: number){
+    this.selectedPlaylist = id;
+  }
+
+  onSavePlaylist(pl: Playlist){
+    pl.Name = this.nameInput;
+    this.plService.changePlaylist(pl);
+    this.selectedPlaylist = null;
   }
 
   ngOnInit(): void { 

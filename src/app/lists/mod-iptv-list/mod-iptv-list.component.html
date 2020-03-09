@@ -1,18 +1,34 @@
 <mat-list>
     <mat-list-item *ngFor="let playlist of playlists">
-        <span class="playlist-name-style" matLine>{{playlist.Name}}</span>
-        <span class="playlist-description" matLine> Cantidad de canales canales: {{playlist.Items}}</span>
-        <button mat-raised-button color="primary">Info</button>
-        <button class="mat-button-config" mat-raised-button color="accent"
-        (click)="onEditPlaylist(playlist)">
-        Editar</button>
-        <button mat-raised-button color="warn" 
-        (click)="onEditChannel(playlist)">Abrir</button>
-        <button class="mat-button-config" mat-raised-button>
-            <mat-icon>cloud_download</mat-icon>
-        </button>
-        <button mat-button>
-            <mat-icon color="warn">delete</mat-icon>
-        </button>
+        <div class="container-row content-spaced row-item-80">
+        <section class="container-column">
+            <div *ngIf="playlist.Id != selectedPlaylist; else form">
+                <span class="playlist-name-style color-200" matLine>{{playlist.Name}}</span>
+                <span class="playlist-description color-190" matLine> Cantidad de canales canales: {{playlist.Items}}</span>
+            </div>
+            <ng-template #form>
+                <form matLine>
+                    <mat-form-field class="mat-input-resize" appearance="fill">
+                        <input class="color-200" type="text" id="name" name="name" placeholder="Ingrese el nombre de la Lista."
+                            [(ngModel)]="nameInput" matInput>
+                    </mat-form-field>
+                    <button class="color-190" type="submit" mat-button (click)="onSavePlaylist(playlist)">
+                        <mat-icon>save</mat-icon> Guardar
+                    </button>
+                </form>
+            </ng-template>
+        </section>
+        <section class="container-row">
+            <button class="mat-button-config" mat-raised-button color="accent" (click)="onEditPlaylist(playlist)"
+                [disabled]="playlist.Id == selectedPlaylist">Editar</button>
+            <button class="mat-button-config" mat-raised-button color="warn" (click)="onEditChannel(playlist)">Abrir</button>
+            <button class="mat-button-config" [disabled] = "true" mat-raised-button>
+                <mat-icon>cloud_download</mat-icon>
+            </button>
+            <button class="mat-button-config" mat-button>
+                <mat-icon color="warn">delete</mat-icon>
+            </button>
+        </section>
+    </div>
     </mat-list-item>
 </mat-list>

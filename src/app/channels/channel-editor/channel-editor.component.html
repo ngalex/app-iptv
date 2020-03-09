@@ -6,8 +6,8 @@
             <div class="container-row">
                 <mat-form-field class="urlContainer" matLine appearance="standart" color="primary">
                     <mat-label>Ingrese la nueva URL</mat-label>
-                    <input type="url" id="channelId" [value]="channel.Url" (keyup.enter)="onChangeUrl(channel, newUrl)" #newUrl
-                        matInput>
+                    <input type="url" id="channelId" [value]="channel.Url" (keyup.enter)="onChangeUrl(channel, newUrl)"
+                        #newUrl matInput>
                 </mat-form-field>
                 <button mat-stroked-button color="primary" (click)="onChangeUrl(channel, newUrl)">Guardar</button>
                 <button mat-stroked-button color="warn" (click)="selectedChannel = null">Cancelar</button>
@@ -18,6 +18,10 @@
         <button (click)="onRemove(channel.Id)" mat-button color="warn">Eliminar</button>
         <button mat-button (click)="onOpenUrl(i)">Abrir</button>
         <mat-checkbox></mat-checkbox>
+        <mat-divider></mat-divider>
+    </mat-list-item>
+    <mat-list-item *ngIf="isEnabledCreating()">
+        <router-outlet></router-outlet>
         <mat-divider></mat-divider>
     </mat-list-item>
 </mat-list>

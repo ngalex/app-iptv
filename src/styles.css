@@ -14,6 +14,9 @@ body { background-color: rgb(30,30,30); margin: 0; font-family: Roboto, "Helveti
 .container-wrap{
     flex-wrap: wrap;
 }
+.content-spaced {
+    justify-content: space-between;
+}
 
 .row-item {
     flex: auto;
@@ -38,4 +41,26 @@ body { background-color: rgb(30,30,30); margin: 0; font-family: Roboto, "Helveti
 }
 .column-item{
     flex: auto;
+}
+
+/*** STYLES ***/
+
+.color-200 {
+    color: rgb(200,200,200);
+}
+.color-100 {
+    color: rgb(100,100,100);
+}
+.color-190 {
+    color: rgb(190,190,190);
+}
+
+.color-30 {
+    color: rgb(30,30,30);
+}
+.color-40 {
+    color: rgb(40,40,40);
+}
+.color-50 {
+    color: rgb(50,50,50);
 }

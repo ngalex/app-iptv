@@ -5,7 +5,7 @@
     <div class = "column-item container-row">
         <section class="container container-column row-item-60">
             <mat-toolbar>
-                <button mat-button [disabled] = '!enableEditChannel' (click)="enableEditChannel = false">
+                <button mat-button [routerLink]="[ '/playlists' ]" [disabled] = 'isHome()'>
                     <mat-icon>arrow_back</mat-icon></button>
                 <span class="spacer"></span>
                 <button mat-button *ngIf="!enableEditChannel; else addAction" 
@@ -17,11 +17,13 @@
                     (click)="enableCreateChannel = true"><mat-icon>add</mat-icon>Agregar Canal</button>
                 </ng-template>
             </mat-toolbar>
+            <router-outlet></router-outlet>
+            <!--
             <app-mod-iptv-list (enableChannelEditor) = "enableEditChannel = $event" [hidden] = "enableEditChannel"
                                 (enablePlaylistEditor) = "enableEditPlaylist = $event"
                                 ></app-mod-iptv-list>
             <app-channel-editor [hidden] = "!enableEditChannel"
-                                ></app-channel-editor>
+                                ></app-channel-editor>-->
         </section>
         <aside class = "row-item-40">
             <section *ngIf="!enableEditPlaylist && !enableCreatePlaylist && !enableCreateChannel">
@@ -53,5 +55,3 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
-
-<router-outlet></router-outlet>
