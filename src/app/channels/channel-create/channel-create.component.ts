@@ -3,6 +3,9 @@ import { ChannelService } from 'src/app/services/channel/channel.service';
 import { PlaylistService } from 'src/app/services/playlist/playlist.service';
 import { Playlist } from 'src/app/models/Playlist';
 import { Channel } from 'src/app/models/Channel';
+import { NavigatorBarService } from 'src/app/services/navigator-service.service';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-channel-create',
@@ -10,13 +13,11 @@ import { Channel } from 'src/app/models/Channel';
   styleUrls: ['./channel-create.component.css']
 })
 export class ChannelCreateComponent implements OnInit {
-@Output() disableChannelCreator = new EventEmitter<boolean>();
 public newChannel: Channel = new Channel(-1,-1,"");
 public urlInput: string;
-  constructor(private plService: PlaylistService, private chnService: ChannelService) {
-    this.plService.sendPlaylist.subscribe((pl: Playlist) => {
-     this.newChannel.IdPlaylist = pl.Id;
-    });
+  constructor(private _location: Location,
+              private navbarService: NavigatorBarService,
+              private chnService: ChannelService) {
   }
 
   ngOnInit(): void {
@@ -24,12 +25,14 @@ public urlInput: string;
 
   onCreate():void{
     this.newChannel.Url = this.urlInput;
-    this.disableChannelCreator.emit(false);
     this.chnService.addChannel(this.newChannel);
+    this.navbarService.removeRoute();
+    this._location.back();
   }
 
   onCancel():void {
-    this.disableChannelCreator.emit(false);
+    this.navbarService.removeRoute();
+    this._location.back();
   }
 
 }

@@ -9,11 +9,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModHeaderComponent } from './mod-header/mod-header.component';
 import { ModFooterComponent } from './mod-footer/mod-footer.component';
 import { ChannelEditorComponent } from './channels/channel-editor/channel-editor.component';
-import { PlaylistService } from './services/playlist/playlist.service';
 import { ModIptvListComponent } from './lists/mod-iptv-list/mod-iptv-list.component';
 import { ListEditorComponent } from './lists/list-editor/list-editor.component';
 import { ListCreateComponent } from './lists/list-create/list-create.component';
 import { ChannelCreateComponent } from './channels/channel-create/channel-create.component';
+import { NavigatorBarComponent } from './lists/navigator-bar/navigator-bar.component';
+
+import { PlaylistService } from './services/playlist/playlist.service';
+import { NavigatorBarService } from './services/navigator-service.service';
 
 
 //Material
@@ -63,7 +66,8 @@ import { FormsModule } from '@angular/forms';
     ListEditorComponent,
     ChannelEditorComponent,
     ListCreateComponent,
-    ChannelCreateComponent
+    ChannelCreateComponent,
+    NavigatorBarComponent
   ],
   imports: [
     BrowserModule,
@@ -107,7 +111,7 @@ import { FormsModule } from '@angular/forms';
     MatTooltipModule,
     MatTreeModule
   ],
-  providers: [ PlaylistService ],
+  providers: [ PlaylistService, NavigatorBarService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

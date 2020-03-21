@@ -4,6 +4,7 @@ import { ChannelService } from 'src/app/services/channel/channel.service';
 import { PlaylistService } from 'src/app/services/playlist/playlist.service';
 import { Playlist } from 'src/app/models/Playlist';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavigatorBarService } from 'src/app/services/navigator-service.service';
 
 @Component({
   selector: 'app-channel-editor',
@@ -20,16 +21,19 @@ export class ChannelEditorComponent implements OnInit {
   constructor(private plService: PlaylistService,
     private chnService: ChannelService,
     private router: Router,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private navbarService: NavigatorBarService) {}
 
   ngOnInit(): void {
     this.channels = [];
-    this.index = this.route.snapshot.params['id'];
+    this.route.paramMap.subscribe( 
+      (params) => { 
+        this.index = +params.get('id');
+        this.navbarService.addRoute("/"+this.index);
+      }
+    );
+    //this.index = this.route.snapshot.params['id'];
     this.loadChannels();
-  }
-
-  isEnabledCreating(): boolean{
-    if(this.router.routerState.snapshot.url == "/edit") return true; else return false;
   }
 
   onAdd(channel: Channel): void {

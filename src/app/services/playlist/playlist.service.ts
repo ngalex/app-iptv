@@ -7,7 +7,7 @@ import { ChannelService } from '../channel/channel.service';
 })
 export class PlaylistService {
   playlistSource: Playlist[];
-  sendPlaylist = new EventEmitter<Playlist>();
+  selectedPlaylist: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private chnService: ChannelService) {
     this.loadPlaylists();

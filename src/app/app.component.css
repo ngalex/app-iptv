@@ -34,11 +34,3 @@ aside {
     }
 }
 
-
-/*** toolbar ***/
-mat-toolbar {
-    background-color: rgb(50, 50, 50);
-}
-.spacer {
-    flex: 1 1 auto;
-}

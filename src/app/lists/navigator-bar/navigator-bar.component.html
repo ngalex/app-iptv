@@ -1,0 +1,12 @@
+<mat-toolbar class="color-50">
+    <button mat-icon-button [disabled]='!isEnabledArrowBack' (click)="back()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span class="spacer"></span>
+    <button mat-button *ngIf="isEnabledAddPlaylist" (click)="onAddPlaylist()">
+        <mat-icon>playlist_add</mat-icon>Agregar Lista
+    </button>
+    <button mat-button *ngIf="isEnabledAddChannel" (click)="onAddChannel()">
+        <mat-icon>add</mat-icon>Agregar Canal
+    </button>
+</mat-toolbar>

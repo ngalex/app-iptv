@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { Playlist } from './models/Playlist';
+import { Component, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavigatorBarService } from './services/navigator-service.service';
 
 @Component({
   selector: 'home',
@@ -9,14 +9,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Home';
-  public enableEditChannel: boolean = false;
-  public enableCreateChannel: boolean = false;
-  public enableEditPlaylist: boolean = false;
-  public enableCreatePlaylist: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private navbarService: NavigatorBarService) {  }
 
-  isHome(): boolean {
-    if (this.router.routerState.snapshot.url == "/playlists") return true; else return false;
-  }
+  
+  
 }

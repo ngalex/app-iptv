@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@
 import { Playlist } from '../../models/Playlist';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PlaylistService } from 'src/app/services/playlist/playlist.service';
+import { NavigatorBarService } from 'src/app/services/navigator-service.service';
 
 @Component({
   selector: 'app-mod-iptv-list',
@@ -9,15 +10,16 @@ import { PlaylistService } from 'src/app/services/playlist/playlist.service';
   styleUrls: ['./mod-iptv-list.component.css']
 })
 export class ModIptvListComponent implements OnInit {
-  @Output() enableChannelEditor = new EventEmitter<boolean>();
-  @Output() enablePlaylistEditor = new EventEmitter<boolean>();
+  //@Output() enableChannelEditor = new EventEmitter<boolean>();
+  //@Output() enablePlaylistEditor = new EventEmitter<boolean>();
   public selectedPlaylist: number;
   public nameInput: string;
   public enableEdit: boolean; 
   public playlists: Playlist[];
 
   constructor(private plService: PlaylistService,
-              private router: Router) {
+              private router: Router,
+              private navbarService: NavigatorBarService) {
     this.playlists = this.plService.playlistSource;    
   }
 
@@ -27,9 +29,10 @@ export class ModIptvListComponent implements OnInit {
     this.enableEdit = true;
   }
   onEditChannel(pl: Playlist):void{
-    this.plService.sendPlaylist.emit(pl);
-    this.enablePlaylistEditor.emit(false);
-    this.enableChannelEditor.emit(true);
+    this.plService.selectedPlaylist.emit(pl.Id);
+    //this.enablePlaylistEditor.emit(false);
+    //this.enableChannelEditor.emit(true);
+    //this.navbarService.addRoute("/"+pl.Id);
     this.router.navigate(['playlists/'+pl.Id]);
   }
 
@@ -44,6 +47,7 @@ export class ModIptvListComponent implements OnInit {
   }
 
   ngOnInit(): void { 
+    this.navbarService.addRoute("/playlists");
   }
 
 }

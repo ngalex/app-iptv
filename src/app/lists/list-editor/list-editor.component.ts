@@ -11,20 +11,12 @@ export class ListEditorComponent implements OnInit {
   @Output() disablePlaylistEditor = new EventEmitter<boolean>();
   public changedPlaylist: Playlist = new Playlist(-1,"test","test",0);
   
-  constructor(private plService: PlaylistService) {
-    this.plService.sendPlaylist.subscribe(
-      (pl: Playlist) => {
-        this.changedPlaylist = pl;
-      });
-      console.log(this.changedPlaylist.Name);
-     
-   }
+  constructor() {}
 
   ngOnInit(): void {
   }
 
   setPlaylist(): void {
-    this.plService.changePlaylist(this.changedPlaylist);
     this.disablePlaylistEditor.emit(false);
   }
 

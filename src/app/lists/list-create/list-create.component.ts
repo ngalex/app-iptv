@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Playlist } from 'src/app/models/Playlist';
 import { PlaylistService } from 'src/app/services/playlist/playlist.service';
+import { Location } from '@angular/common';
+import { NavigatorBarService } from 'src/app/services/navigator-service.service';
 
 @Component({
   selector: 'app-list-create',
@@ -8,10 +10,11 @@ import { PlaylistService } from 'src/app/services/playlist/playlist.service';
   styleUrls: ['./list-create.component.css']
 })
 export class ListCreateComponent implements OnInit {
-  @Output() disablePlaylistCreator = new EventEmitter<boolean>();
   public newPlaylist: Playlist;
   public nameInput: string;
-  constructor(private plService: PlaylistService) { }
+  constructor(private _location: Location,
+              private navbarService: NavigatorBarService,
+              private plService: PlaylistService) { }
 
   ngOnInit(): void {
     this.newPlaylist = new Playlist(-1, "","",0);
@@ -20,11 +23,13 @@ export class ListCreateComponent implements OnInit {
   onCreate(): void {
     this.newPlaylist.Name = this.nameInput;
     this.plService.addPlaylist(this.newPlaylist);
-    this.disablePlaylistCreator.emit(false);
+    this.navbarService.removeRoute();
+    this._location.back();
   }
 
   onCancel(): void {
-    this.disablePlaylistCreator.emit(false);
+    this.navbarService.removeRoute();
+    this._location.back();
   }
 
 }
