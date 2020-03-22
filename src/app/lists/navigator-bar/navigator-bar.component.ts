@@ -13,13 +13,12 @@ export class NavigatorBarComponent implements OnInit {
   isEnabledAddChannel: boolean;
   isEnabledAddPlaylist: boolean;
   isEnabledArrowBack: boolean;
+  //routes: string[];
 
   constructor(private _location: Location,
-              private router: Router,
-              private navbarService: NavigatorBarService) {
-  }
-
-  ngOnInit(): void {
+    private router: Router,
+    private navbarService: NavigatorBarService) {
+    //this.routes = this.navbarService.routesStack;    
     this.navbarService.routesTop.subscribe(
       (param: string) => {
         if (param == "/playlists") {
@@ -38,24 +37,23 @@ export class NavigatorBarComponent implements OnInit {
     );
   }
 
+  ngOnInit(): void {
+  }
+
   onAddChannel(): void {
-    let routerTop = this.navbarService.routesStack[this.navbarService.routesStack.length - 1];
-    if (routerTop != "/add") {
+    if (this.navbarService.topRoute() != "/add") {
       this.router.navigate([this.router.url + "/add"]);
-      this.navbarService.addRoute("/add");
     }
   }
 
   onAddPlaylist(): void {
-    let routerTop = this.navbarService.routesStack[this.navbarService.routesStack.length - 1];
-    if (routerTop != "/add") {
+    if (this.navbarService.topRoute() != "/add") {
       this.router.navigate(["/playlists/add"]);
-      this.navbarService.addRoute("/add");
     }
   }
 
   back(): void {
     this.navbarService.removeRoute();
-    this._location.back();
+    //this._location.back();
   }
 }

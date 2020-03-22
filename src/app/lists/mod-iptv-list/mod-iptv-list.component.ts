@@ -1,8 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Playlist } from '../../models/Playlist';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 import { PlaylistService } from 'src/app/services/playlist/playlist.service';
-import { NavigatorBarService } from 'src/app/services/navigator-service.service';
 
 @Component({
   selector: 'app-mod-iptv-list',
@@ -10,17 +9,17 @@ import { NavigatorBarService } from 'src/app/services/navigator-service.service'
   styleUrls: ['./mod-iptv-list.component.css']
 })
 export class ModIptvListComponent implements OnInit {
-  //@Output() enableChannelEditor = new EventEmitter<boolean>();
-  //@Output() enablePlaylistEditor = new EventEmitter<boolean>();
   public selectedPlaylist: number;
   public nameInput: string;
   public enableEdit: boolean; 
   public playlists: Playlist[];
 
   constructor(private plService: PlaylistService,
-              private router: Router,
-              private navbarService: NavigatorBarService) {
-    this.playlists = this.plService.playlistSource;    
+              private router: Router) {
+  }
+
+  ngOnInit(): void {   
+    this.playlists = this.plService.playlistSource;
   }
 
   onEditPlaylist(pl: Playlist):void {
@@ -29,10 +28,7 @@ export class ModIptvListComponent implements OnInit {
     this.enableEdit = true;
   }
   onEditChannel(pl: Playlist):void{
-    this.plService.selectedPlaylist.emit(pl.Id);
-    //this.enablePlaylistEditor.emit(false);
-    //this.enableChannelEditor.emit(true);
-    //this.navbarService.addRoute("/"+pl.Id);
+    this.plService.selectedPlaylist = this.selectedPlaylist;
     this.router.navigate(['playlists/'+pl.Id]);
   }
 
@@ -46,8 +42,8 @@ export class ModIptvListComponent implements OnInit {
     this.selectedPlaylist = null;
   }
 
-  ngOnInit(): void { 
-    this.navbarService.addRoute("/playlists");
+  onDelete(id: number) {
+    this.plService.removePlaylist(id);
   }
 
 }

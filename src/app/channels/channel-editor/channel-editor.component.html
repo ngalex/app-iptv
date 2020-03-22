@@ -1,4 +1,7 @@
 <mat-list>
+    <mat-list-item>
+        <router-outlet></router-outlet>
+    </mat-list-item>
     <mat-list-item *ngFor="let channel of channels, let i=index">
         <span class="channel-tittle" matLine>Channel {{ channel.Id }} </span>
         <span *ngIf="channel.Id != selectedChannel; else edit" matLine>URL: {{ channel.Url }} </span>
@@ -19,9 +22,5 @@
         <button mat-button (click)="onOpenUrl(i)">Abrir</button>
         <mat-checkbox></mat-checkbox>
         <mat-divider></mat-divider>
-    </mat-list-item>
-    <mat-list-item>
-        <router-outlet></router-outlet>
-
     </mat-list-item>
 </mat-list>

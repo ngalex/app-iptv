@@ -56,6 +56,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { FormsModule } from '@angular/forms';
+import { ChannelService } from './services/channel/channel.service';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,8 @@ import { FormsModule } from '@angular/forms';
     ChannelEditorComponent,
     ListCreateComponent,
     ChannelCreateComponent,
-    NavigatorBarComponent
+    NavigatorBarComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

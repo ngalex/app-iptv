@@ -14,7 +14,10 @@ export class ListCreateComponent implements OnInit {
   public nameInput: string;
   constructor(private _location: Location,
               private navbarService: NavigatorBarService,
-              private plService: PlaylistService) { }
+              private plService: PlaylistService) { 
+                this.navbarService.addRoute("/add");
+                console.log("/add added");
+              }
 
   ngOnInit(): void {
     this.newPlaylist = new Playlist(-1, "","",0);

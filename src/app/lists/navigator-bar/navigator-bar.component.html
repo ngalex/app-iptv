@@ -2,6 +2,7 @@
     <button mat-icon-button [disabled]='!isEnabledArrowBack' (click)="back()">
         <mat-icon>arrow_back</mat-icon>
     </button>
+    <!--<span *ngFor="let item of routes">{{ item }}</span>-->
     <span class="spacer"></span>
     <button mat-button *ngIf="isEnabledAddPlaylist" (click)="onAddPlaylist()">
         <mat-icon>playlist_add</mat-icon>Agregar Lista

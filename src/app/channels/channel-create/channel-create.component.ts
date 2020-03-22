@@ -17,13 +17,17 @@ public newChannel: Channel = new Channel(-1,-1,"");
 public urlInput: string;
   constructor(private _location: Location,
               private navbarService: NavigatorBarService,
+              private plService: PlaylistService,
               private chnService: ChannelService) {
+              this.navbarService.addRoute("/add");
+              console.log("/add added");
   }
 
   ngOnInit(): void {
   }
 
   onCreate():void{
+    this.newChannel.IdPlaylist = this.plService.selectedPlaylist;
     this.newChannel.Url = this.urlInput;
     this.chnService.addChannel(this.newChannel);
     this.navbarService.removeRoute();

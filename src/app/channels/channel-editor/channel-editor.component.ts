@@ -3,7 +3,7 @@ import { Channel } from '../../models/Channel';
 import { ChannelService } from 'src/app/services/channel/channel.service';
 import { PlaylistService } from 'src/app/services/playlist/playlist.service';
 import { Playlist } from 'src/app/models/Playlist';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NavigatorBarService } from 'src/app/services/navigator-service.service';
 
 @Component({
@@ -20,34 +20,37 @@ export class ChannelEditorComponent implements OnInit {
 
   constructor(private plService: PlaylistService,
     private chnService: ChannelService,
-    private router: Router,
     private route: ActivatedRoute,
-    private navbarService: NavigatorBarService) {}
-
-  ngOnInit(): void {
-    this.channels = [];
-    this.route.paramMap.subscribe( 
-      (params) => { 
+    private navbarService: NavigatorBarService) {
+    this.route.paramMap.subscribe(
+      (params) => {
         this.index = +params.get('id');
-        this.navbarService.addRoute("/"+this.index);
+        this.plService.selectedPlaylist = this.index;
+        this.navbarService.addRoute("/" + this.index);
+        console.log("/id added");
+        //this.index = this.route.snapshot.params['id'];
       }
     );
-    //this.index = this.route.snapshot.params['id'];
-    this.loadChannels();
+    this.chnService.loadChannels(this.plService.selectedPlaylist);
+    this.channels = this.chnService.channels;
+  }
+
+  ngOnInit(): void {
   }
 
   onAdd(channel: Channel): void {
     this.chnService.addChannel(channel);
+    this.chnService.loadChannels(this.plService.selectedPlaylist);
   }
-
-  loadChannels() {
-    this.channels = [];
-    if (this.index != null)
-      this.chnService.channelsSource.forEach(channel => {
-        if (channel.IdPlaylist == this.index) this.channels.push(channel);
-      });
-  }
-
+  /*
+    loadChannels() {
+      this.channels = [];
+      if (this.index != null)
+        this.chnService.channelsSource.forEach(channel => {
+          if (channel.IdPlaylist == this.index) this.channels.push(channel);
+        });
+    }
+  */
   onEnableEdition(i: number): void {
     this.selectedChannel = i;
     this.enableEdit = true;
@@ -58,10 +61,12 @@ export class ChannelEditorComponent implements OnInit {
     this.chnService.changeChannel(chn);
     this.selectedChannel = null;
     this.enableEdit = false;
+    this.chnService.loadChannels(this.plService.selectedPlaylist);
   }
 
   onRemove(id: number) {
     this.chnService.removeChannel(id);
+    this.chnService.loadChannels(this.plService.selectedPlaylist);
   }
 
   onOpenUrl(i: number) {

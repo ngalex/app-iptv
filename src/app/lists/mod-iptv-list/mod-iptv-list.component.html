@@ -28,7 +28,7 @@
             <button class="mat-button-config" [disabled] = "true" mat-raised-button>
                 <mat-icon>cloud_download</mat-icon>
             </button>
-            <button class="mat-button-config" mat-button>
+            <button class="mat-button-config" mat-button (click)="onDelete(playlist.Id)">
                 <mat-icon color="warn">delete</mat-icon>
             </button>
         </section>

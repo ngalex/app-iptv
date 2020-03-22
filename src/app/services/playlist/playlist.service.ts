@@ -7,23 +7,23 @@ import { ChannelService } from '../channel/channel.service';
 })
 export class PlaylistService {
   playlistSource: Playlist[];
-  selectedPlaylist: EventEmitter<number> = new EventEmitter<number>();
+  selectedPlaylist: number;
 
-  constructor(private chnService: ChannelService) {
+  constructor() {
     this.loadPlaylists();
    }
    
    loadPlaylists(): void {
     this.playlistSource = [
-      new Playlist(0, 'Playlist 0', 'https://', this.chnService.countPLChannels(0)),
-      new Playlist(1, 'Playlist 1', 'https://', this.chnService.countPLChannels(1)),
-      new Playlist(2, 'Playlist 2', 'https://', this.chnService.countPLChannels(2)),
-      new Playlist(3, 'Playlist 3', 'https://', this.chnService.countPLChannels(3)),
-      new Playlist(4, 'Playlist 4', 'https://', this.chnService.countPLChannels(4)),
-      new Playlist(5, 'Playlist 5', 'https://', this.chnService.countPLChannels(5)),
-      new Playlist(6, 'Playlist 6', 'https://', this.chnService.countPLChannels(6)),
-      new Playlist(7, 'Playlist 7', 'https://', this.chnService.countPLChannels(7)),
-      new Playlist(8, 'Playlist 8', 'https://', this.chnService.countPLChannels(8))
+      new Playlist(0, 'Playlist 0', 'https://', 0),
+      new Playlist(1, 'Playlist 1', 'https://', 0),
+      new Playlist(2, 'Playlist 2', 'https://', 0),
+      new Playlist(3, 'Playlist 3', 'https://', 0),
+      new Playlist(4, 'Playlist 4', 'https://', 0),
+      new Playlist(5, 'Playlist 5', 'https://', 0),
+      new Playlist(6, 'Playlist 6', 'https://', 0),
+      new Playlist(7, 'Playlist 7', 'https://', 0),
+      new Playlist(8, 'Playlist 8', 'https://', 0)
     ];
    }
 

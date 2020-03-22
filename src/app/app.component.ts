@@ -7,11 +7,17 @@ import { NavigatorBarService } from './services/navigator-service.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Home';
 
-  constructor(private navbarService: NavigatorBarService) {  }
+  constructor(private navbarService: NavigatorBarService) {
+     
+  }
 
-  
+  ngOnInit(): void {
+    this.navbarService.clearRoutes();
+    this.navbarService.addRoute("/playlists");
+    console.log("/playlists added"); 
+  }
   
 }
