@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Channel } from 'src/app/models/Channel';
-import { PlaylistService } from '../playlist/playlist.service';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,13 +28,9 @@ export class ChannelService {
     new Channel(3, 18, 'http://'),
     new Channel(5, 19, 'http://'),
   ];
-  channels: Channel[];
+  channels$ = new Subject<Channel[]>();
 
-  constructor(private plService: PlaylistService) {
-    //this.loadChannels(this.plService.selectedPlaylist);
-    //console.log(this.plService.selectedPlaylist)
-  }
-  
+  constructor() {}
 
   countPLChannels(idPl: number): number {
     let n = 0;
@@ -43,13 +39,19 @@ export class ChannelService {
     });
     return n;
   }
-
-  loadChannels(idPlaylist: number) {
-    this.channels = []
-    if (idPlaylist != null)
+  
+  getChannels(idPl: number): Channel[] {
+    let chns: Channel[] = []
+    if (idPl != null) {
       this.channelsSource.forEach(channel => {
-        if (channel.IdPlaylist == idPlaylist) this.channels.push(channel);
-      });
+        if (channel.IdPlaylist == idPl) chns.push(channel);
+      })
+    }
+    return chns;
+  }
+
+  getChannels$(): Observable<Channel[]> {
+    return this.channels$.asObservable();
   }
 
   addChannel(chn: Channel): void {
@@ -58,13 +60,14 @@ export class ChannelService {
       if (channel.Id > maxId) maxId = channel.Id;
     });
     chn.Id = ++maxId;
-    console.log(chn);
     if (chn.Id != -1) this.channelsSource.push(chn);
+    this.channels$.next(this.channelsSource);
   }
 
   removeChannel(id: number): void {
     let index = this.findById(id);
     if (index > -1) this.channelsSource.splice(index, 1);
+    this.channels$.next(this.channelsSource);
   }
 
   findById(id: number): number {
@@ -77,5 +80,6 @@ export class ChannelService {
   changeChannel(chn: Channel) {
     let index = this.findById(chn.Id);
     if (index > -1) this.channelsSource[index] = chn;
+    this.channels$.next(this.channelsSource);
   }
 }

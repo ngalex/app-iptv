@@ -114,7 +114,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     MatTooltipModule,
     MatTreeModule
   ],
-  providers: [ PlaylistService, NavigatorBarService ],
+  providers: [ PlaylistService, ChannelService, NavigatorBarService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

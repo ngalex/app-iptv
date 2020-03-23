@@ -13,47 +13,45 @@ export class NavigatorBarComponent implements OnInit {
   isEnabledAddChannel: boolean;
   isEnabledAddPlaylist: boolean;
   isEnabledArrowBack: boolean;
-  //routes: string[];
 
   constructor(private _location: Location,
     private router: Router,
     private navbarService: NavigatorBarService) {
-    //this.routes = this.navbarService.routesStack;    
     this.navbarService.routesTop.subscribe(
       (param: string) => {
-        if (param == "/playlists") {
-          this.isEnabledArrowBack = false;
+        (this.navbarService.routesStack.length < 2) ? this.isEnabledArrowBack = false : this.isEnabledArrowBack = true;
+        if (this.navbarService.isActivePlaylistsEditor && !this.navbarService.isActiveChannelEditor) {
           this.isEnabledAddChannel = false;
           this.isEnabledAddPlaylist = true;
           this.isEnabledChannelList = false;
         }
+        //no hay otra situacion
         else {
-          this.isEnabledArrowBack = true;
           this.isEnabledAddChannel = true;
           this.isEnabledAddPlaylist = false;
           this.isEnabledChannelList = true;
         }
       }
-    );
+    ); console.log("app-navbar constructor");
   }
 
   ngOnInit(): void {
+    console.log("app-navbar oninit");
   }
 
   onAddChannel(): void {
-    if (this.navbarService.topRoute() != "/add") {
-      this.router.navigate([this.router.url + "/add"]);
+    if (this.navbarService.topRoute() != "/addChannel") {
+      this.router.navigate([this.router.url + "/addChannel"]);
     }
   }
 
   onAddPlaylist(): void {
-    if (this.navbarService.topRoute() != "/add") {
-      this.router.navigate(["/playlists/add"]);
+    if (this.navbarService.topRoute() != "/addPlaylist") {
+      this.router.navigate(["/playlists/addPlaylist"]);
     }
   }
 
   back(): void {
     this.navbarService.removeRoute();
-    //this._location.back();
   }
 }

@@ -11,3 +11,6 @@
     font-weight: lighter !important;
     font-size: 0.8em !important;
 }
+input::placeholder {
+    color:rgb(100,100,100);
+}

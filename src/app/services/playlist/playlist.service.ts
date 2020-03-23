@@ -30,7 +30,6 @@ export class PlaylistService {
    addPlaylist(pl: Playlist): void{
      let maxId = -1;
      this.playlistSource.forEach(playlist => {
-       console.log(playlist.Id)
        if(playlist.Id > maxId) maxId = playlist.Id; 
      });
      pl.Id = maxId + 1;

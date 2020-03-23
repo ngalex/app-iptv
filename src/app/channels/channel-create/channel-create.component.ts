@@ -6,6 +6,7 @@ import { Channel } from 'src/app/models/Channel';
 import { NavigatorBarService } from 'src/app/services/navigator-service.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-channel-create',
@@ -18,9 +19,10 @@ public urlInput: string;
   constructor(private _location: Location,
               private navbarService: NavigatorBarService,
               private plService: PlaylistService,
-              private chnService: ChannelService) {
-              this.navbarService.addRoute("/add");
-              console.log("/add added");
+              private chnService: ChannelService,
+              private _snackBar: MatSnackBar) {
+              this.navbarService.addRoute("/addChannel");
+              console.log("/addChannel added");
   }
 
   ngOnInit(): void {
@@ -30,13 +32,18 @@ public urlInput: string;
     this.newChannel.IdPlaylist = this.plService.selectedPlaylist;
     this.newChannel.Url = this.urlInput;
     this.chnService.addChannel(this.newChannel);
+    this.openSnackBar("Canal creado (" + this.newChannel.Id + ")", "Cerrar");
     this.navbarService.removeRoute();
-    this._location.back();
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
   onCancel():void {
     this.navbarService.removeRoute();
-    this._location.back();
   }
 
 }

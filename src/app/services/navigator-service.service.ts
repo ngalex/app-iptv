@@ -5,10 +5,12 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class NavigatorBarService {
+  isActivePlaylistsEditor: boolean;
+  isActiveChannelEditor: boolean;
   routesStack: string[]= [];
   routesTop: EventEmitter<string> = new EventEmitter<string>();
   
-  constructor(private router: Router) {
+  constructor(private router: Router) {console.log("app-navbarservice constructor");
   }
 
   addRoute(route: string){

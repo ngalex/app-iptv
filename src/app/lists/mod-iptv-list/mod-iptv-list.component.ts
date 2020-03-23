@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Playlist } from '../../models/Playlist';
 import { Router } from '@angular/router';
 import { PlaylistService } from 'src/app/services/playlist/playlist.service';
+import { NavigatorBarService } from 'src/app/services/navigator-service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-mod-iptv-list',
@@ -14,12 +16,24 @@ export class ModIptvListComponent implements OnInit {
   public enableEdit: boolean; 
   public playlists: Playlist[];
 
-  constructor(private plService: PlaylistService,
-              private router: Router) {
+  constructor(private navbarService: NavigatorBarService,
+              private plService: PlaylistService,
+              private router: Router,
+              private _snackBar: MatSnackBar) {
+                this.navbarService.isActivePlaylistsEditor = true;
+                console.log("app-iptvlist constructor");     
+                this.navbarService.clearRoutes();
+                this.navbarService.addRoute("/playlists");
+                console.log("/playlists added"); 
+                
   }
 
-  ngOnInit(): void {   
+  ngOnInit(): void {   console.log("app-iptvlist oninit");
     this.playlists = this.plService.playlistSource;
+  }
+
+  ngOnDestroy(): void {
+    this.navbarService.isActivePlaylistsEditor = false;
   }
 
   onEditPlaylist(pl: Playlist):void {
@@ -40,10 +54,17 @@ export class ModIptvListComponent implements OnInit {
     pl.Name = this.nameInput;
     this.plService.changePlaylist(pl);
     this.selectedPlaylist = null;
+    this.openSnackBar("Guardado", "Cerrar");
   }
 
   onDelete(id: number) {
     this.plService.removePlaylist(id);
+    this.openSnackBar("Eliminado", "Cerrar");
   }
 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
 }

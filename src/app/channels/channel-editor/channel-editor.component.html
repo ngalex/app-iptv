@@ -2,7 +2,7 @@
     <mat-list-item>
         <router-outlet></router-outlet>
     </mat-list-item>
-    <mat-list-item *ngFor="let channel of channels, let i=index">
+    <mat-list-item *ngFor="let channel of this.channels, let i=index">
         <span class="channel-tittle" matLine>Channel {{ channel.Id }} </span>
         <span *ngIf="channel.Id != selectedChannel; else edit" matLine>URL: {{ channel.Url }} </span>
         <ng-template #edit>

@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModFooterComponent implements OnInit {
 
-  constructor() { }
+  constructor() {console.log("app-footer constructor"); }
 
-  ngOnInit(): void {
+  ngOnInit(): void {console.log("app-footer oninit");
   }
 
 }

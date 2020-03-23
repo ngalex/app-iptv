@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+    console.log("app-header constructor");
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void {console.log("app-header oninit");
   }
 
 }

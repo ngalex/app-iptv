@@ -7,23 +7,27 @@ import { ChannelCreateComponent } from './channels/channel-create/channel-create
 import { ListCreateComponent } from './lists/list-create/list-create.component';
 
 const routes: Routes = [
-  { path: 'playlists', component: ModIptvListComponent, children: [
-    {path: 'add', component: ListCreateComponent}
-  ]},
-  { path: 'playlists/:id', component: ChannelEditorComponent,  children: [
-    {path: 'add', component: ChannelCreateComponent}
-  ]},
-  { path: '', redirectTo: '/playlists', pathMatch: 'full' }, 
-  { path: '**', redirectTo : '/playlists', pathMatch: 'full' }
+  {
+    path: 'playlists', component: ModIptvListComponent, children: [
+      { path: 'addPlaylist', component: ListCreateComponent }
+    ]
+  },
+  {
+    path: 'playlists/:id', component: ChannelEditorComponent, children: [
+      { path: 'addChannel', component: ChannelCreateComponent }
+    ]
+  },
+  { path: '', redirectTo: '/playlists', pathMatch: 'full' },
+  { path: '**', redirectTo: '/playlists', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{
-      enableTracing: false, 
-      paramsInheritanceStrategy: "always",
-      useHash: true
-    }
-    )],
+  imports: [RouterModule.forRoot(routes, {
+    enableTracing: false,
+    paramsInheritanceStrategy: "always",
+    useHash: true
+  }
+  )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

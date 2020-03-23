@@ -1,9 +1,9 @@
-<form>
-    <mat-form-field>
-        <mat-label>Nombre:</mat-label>
-        <input id="name" name="name" type="text" [(ngModel)]="nameInput" matInput>
+<form class="container-row">
+    <mat-form-field class="row-item-60 color-200">
+        <mat-label class="color-200">Ingrese el nombre de la lista</mat-label>
+        <input class="color-200" id="name" name="name" type="text" [(ngModel)]="nameInput" matInput placeholder="Ingrese el nuevo nombre de la lista">
     </mat-form-field>
-    <button mat-button (click)="onCreate()">Crear</button>
-    <button mat-button color="warn"
+    <button mat-button class="row-item-20 color-200" (click)="onCreate()">Crear</button>
+    <button mat-button class="row-item-20" color="warn"
     (click)="onCancel()">Cancelar</button>
 </form>

@@ -1,10 +1,12 @@
-import { Component, OnInit, Input, SimpleChanges, SimpleChange } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Channel } from '../../models/Channel';
 import { ChannelService } from 'src/app/services/channel/channel.service';
 import { PlaylistService } from 'src/app/services/playlist/playlist.service';
 import { Playlist } from 'src/app/models/Playlist';
 import { ActivatedRoute } from '@angular/router';
 import { NavigatorBarService } from 'src/app/services/navigator-service.service';
+import { Observable } from 'rxjs/internal/Observable';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-channel-editor',
@@ -17,40 +19,40 @@ export class ChannelEditorComponent implements OnInit {
   public selectedChannel: number = null;
   public enableEdit: boolean = false;
   public index: number;
+  public chn$: Observable<Channel[]>;
 
   constructor(private plService: PlaylistService,
     private chnService: ChannelService,
     private route: ActivatedRoute,
-    private navbarService: NavigatorBarService) {
+    private navbarService: NavigatorBarService,
+    private _snackBar: MatSnackBar) {
+      console.log("app-channeleditor constructor");
+    this.navbarService.isActiveChannelEditor = true;
     this.route.paramMap.subscribe(
       (params) => {
         this.index = +params.get('id');
         this.plService.selectedPlaylist = this.index;
+        this.channels = this.chnService.getChannels(this.index);
         this.navbarService.addRoute("/" + this.index);
         console.log("/id added");
         //this.index = this.route.snapshot.params['id'];
       }
     );
-    this.chnService.loadChannels(this.plService.selectedPlaylist);
-    this.channels = this.chnService.channels;
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { console.log("app-channeleditor oninit");
+    this.chn$ = this.chnService.getChannels$();
+    this.chn$.subscribe( () => this.channels = this.chnService.getChannels(this.index));
+  }
+
+  ngOnDestroy(): void {
+    this.navbarService.isActiveChannelEditor = false;
   }
 
   onAdd(channel: Channel): void {
     this.chnService.addChannel(channel);
-    this.chnService.loadChannels(this.plService.selectedPlaylist);
   }
-  /*
-    loadChannels() {
-      this.channels = [];
-      if (this.index != null)
-        this.chnService.channelsSource.forEach(channel => {
-          if (channel.IdPlaylist == this.index) this.channels.push(channel);
-        });
-    }
-  */
+
   onEnableEdition(i: number): void {
     this.selectedChannel = i;
     this.enableEdit = true;
@@ -61,12 +63,18 @@ export class ChannelEditorComponent implements OnInit {
     this.chnService.changeChannel(chn);
     this.selectedChannel = null;
     this.enableEdit = false;
-    this.chnService.loadChannels(this.plService.selectedPlaylist);
+    this.openSnackBar("URL cambiada correctamente", "Cerrar");
   }
 
   onRemove(id: number) {
     this.chnService.removeChannel(id);
-    this.chnService.loadChannels(this.plService.selectedPlaylist);
+    this.openSnackBar("Eliminado", "Cerrar");
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
   onOpenUrl(i: number) {

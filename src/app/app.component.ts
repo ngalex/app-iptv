@@ -1,5 +1,4 @@
 import { Component, OnInit  } from '@angular/core';
-import { Router } from '@angular/router';
 import { NavigatorBarService } from './services/navigator-service.service';
 
 @Component({
@@ -10,14 +9,12 @@ import { NavigatorBarService } from './services/navigator-service.service';
 export class AppComponent implements OnInit {
   title = 'Home';
 
-  constructor(private navbarService: NavigatorBarService) {
-     
+  constructor() {
+    console.log("app-module constructor");
   }
 
   ngOnInit(): void {
-    this.navbarService.clearRoutes();
-    this.navbarService.addRoute("/playlists");
-    console.log("/playlists added"); 
+    console.log("app-modulo oninit");
   }
   
 }

@@ -1,5 +1,5 @@
-<mat-list>
-    <mat-list-item>
+<mat-list >
+    <mat-list-item >
         <router-outlet></router-outlet>
     </mat-list-item>
     <mat-list-item *ngFor="let playlist of playlists">
@@ -11,8 +11,8 @@
             </div>
             <ng-template #form>
                 <form matLine>
-                    <mat-form-field class="mat-input-resize" appearance="fill">
-                        <input class="color-200" type="text" id="name" name="name" placeholder="Ingrese el nombre de la Lista."
+                    <mat-form-field class="color-200 mat-input-resize" appearance="fill">
+                        <input type="text" id="name" name="name" placeholder="Ingrese el nombre de la Lista."
                             [(ngModel)]="nameInput" matInput>
                     </mat-form-field>
                     <button class="color-190" type="submit" mat-button (click)="onSavePlaylist(playlist)">
@@ -34,4 +34,5 @@
         </section>
     </div>
     </mat-list-item>
+    
 </mat-list>
