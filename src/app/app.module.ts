@@ -58,6 +58,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import { FormsModule } from '@angular/forms';
 import { ChannelService } from './services/channel/channel.service';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     ListCreateComponent,
     ChannelCreateComponent,
     NavigatorBarComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    TaskListComponent
   ],
   imports: [
     BrowserModule,
