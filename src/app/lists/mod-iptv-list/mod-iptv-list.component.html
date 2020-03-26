@@ -1,38 +1,45 @@
-<mat-list >
-    <mat-list-item >
-        <router-outlet></router-outlet>
-    </mat-list-item>
-    <mat-list-item *ngFor="let playlist of playlists">
-        <div class="container-row content-spaced row-item-80">
+<div class="container-column pall-1">
+    <router-outlet></router-outlet>
+    <div *ngFor="let playlist of playlists" class="container-row content-spaced content-wrap ptb-1">
         <section class="container-column">
-            <div *ngIf="playlist.Id != selectedPlaylist; else form">
-                <span class="playlist-name-style color-200" matLine>{{playlist.Name}}</span>
-                <span class="playlist-description color-190" matLine> Cantidad de canales canales: {{playlist.Items}}</span>
+            <div *ngIf="playlist.Id != selectedPlaylist; else form" class="container-column">
+                <span class="mat-title m-reset">{{playlist.Name}}</span>
+                <span class="mat-caption"> Cantidad de canales canales:
+                    {{playlist.Items}}</span>
             </div>
             <ng-template #form>
                 <form matLine>
-                    <mat-form-field class="color-200 mat-input-resize" appearance="fill">
+                    <mat-form-field >
+                        <mat-label>Nombre de la Lista</mat-label>
                         <input type="text" id="name" name="name" placeholder="Ingrese el nombre de la Lista."
                             [(ngModel)]="nameInput" matInput>
                     </mat-form-field>
-                    <button class="color-190" type="submit" mat-button (click)="onSavePlaylist(playlist)">
+                    <button mat-button class="ml-1" type="submit" (click)="onSavePlaylist(playlist)">
                         <mat-icon>save</mat-icon> Guardar
                     </button>
                 </form>
             </ng-template>
         </section>
-        <section class="container-row">
-            <button class="mat-button-config" mat-raised-button color="accent" (click)="onEditPlaylist(playlist)"
+        <section class="showLgButtons container-row content-align-center">
+            <button mat-raised-button class="mr-1" color="primary" (click)="onEditPlaylist(playlist)"
                 [disabled]="playlist.Id == selectedPlaylist">Editar</button>
-            <button class="mat-button-config" mat-raised-button color="warn" (click)="onEditChannel(playlist)">Abrir</button>
-            <button class="mat-button-config" [disabled] = "true" mat-raised-button>
+            <button class="mr-1" mat-raised-button color="warn" (click)="onEditChannel(playlist)">Abrir</button>
+            <button class="mr-1" [disabled]="true" mat-raised-button>
                 <mat-icon>cloud_download</mat-icon>
             </button>
-            <button class="mat-button-config" mat-button (click)="onDelete(playlist.Id)">
+            <button mat-icon-button (click)="onDelete(playlist.Id)">
                 <mat-icon color="warn">delete</mat-icon>
             </button>
         </section>
+        <section class="showMobileMenu">
+            <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="onEditPlaylist(playlist)"><mat-icon>edit</mat-icon>Editar</button>
+                <button mat-menu-item (click)="onDelete(playlist.Id)"><mat-icon color="warn">delete</mat-icon>Eliminar</button>
+                <button mat-menu-item (click)="onEditChannel(playlist)"><mat-icon>folder_open</mat-icon> Abrir</button>
+            </mat-menu>
+
+        </section>
+        
     </div>
-    </mat-list-item>
-    
-</mat-list>
+</div>

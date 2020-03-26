@@ -1,8 +1,12 @@
 <form action="">
-    <mat-form-field class="color-200">
-        <mat-label class="color-200">Ingrese la URL</mat-label>
-        <input type="url" id="url" name="url" [(ngModel)]="urlInput" matInput>
-    </mat-form-field>
-    <button mat-button (click)="onCreate()">Crear</button>
-    <button mat-button color="warn" (click)="onCancel()">Cancelar</button>
+    <div class="container-row content-align-center content-wrap">
+        <mat-form-field class="row-item-60">
+            <mat-label>Ingrese la URL</mat-label>
+            <input type="url" id="url" name="url" [(ngModel)]="urlInput" matInput>
+        </mat-form-field>
+        <section>
+            <button mat-button class="ml-1" (click)="onCreate()">Crear</button>
+            <button mat-button class="ml-1" color="warn" (click)="onCancel()">Cancelar</button>
+        </section>
+    </div>
 </form>

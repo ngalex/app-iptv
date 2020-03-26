@@ -1,6 +1,8 @@
-<div class="header">
-<mat-toolbar color ="primary">
-    <a [routerLink]="[ '/playlists' ]"><span mat>HEADER</span></a>
-    
+<mat-toolbar class="container-row content-spaced" color="primary">
+    <span [routerLink]="[ '/playlists' ]" class="pointer">HEADER</span>
+    <div class="container-row content-spaced content-align-center ">
+        <mat-icon class="mr-1">wb_sunny</mat-icon>
+        <mat-slide-toggle (click)="onSetTheme()"></mat-slide-toggle>
+        <mat-icon class="ml-1">brightness_1</mat-icon>
+    </div>
 </mat-toolbar>
-</div>

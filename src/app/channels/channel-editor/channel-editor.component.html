@@ -1,26 +1,35 @@
-<mat-list>
-    <mat-list-item>
-        <router-outlet></router-outlet>
-    </mat-list-item>
-    <mat-list-item *ngFor="let channel of this.channels, let i=index">
-        <span class="channel-tittle" matLine>Channel {{ channel.Id }} </span>
-        <span *ngIf="channel.Id != selectedChannel; else edit" matLine>URL: {{ channel.Url }} </span>
-        <ng-template #edit>
-            <div class="container-row">
-                <mat-form-field class="urlContainer" matLine appearance="standart" color="primary">
-                    <mat-label>Ingrese la nueva URL</mat-label>
-                    <input type="url" id="channelId" [value]="channel.Url" (keyup.enter)="onChangeUrl(channel, newUrl)"
-                        #newUrl matInput>
-                </mat-form-field>
-                <button mat-stroked-button color="primary" (click)="onChangeUrl(channel, newUrl)">Guardar</button>
-                <button mat-stroked-button color="warn" (click)="selectedChannel = null">Cancelar</button>
-            </div>
-        </ng-template>
-        <button mat-button color="primary" (click)="onEnableEdition(channel.Id)"
-            *ngIf="channel.Id != selectedChannel">Cambiar Url</button>
-        <button (click)="onRemove(channel.Id)" mat-button color="warn">Eliminar</button>
-        <button mat-button (click)="onOpenUrl(i)">Abrir</button>
-        <mat-checkbox></mat-checkbox>
-        <mat-divider></mat-divider>
-    </mat-list-item>
-</mat-list>
+<div class="container-column pall-1">
+    <router-outlet></router-outlet>
+    <div *ngFor="let channel of this.channels, let i=index" class="container-row content-spaced content-wrap ptb-1">
+        <section class="container-column">
+            <span class="mat-title m-reset" matLine>Channel {{ channel.Id }} </span>
+            <span *ngIf="channel.Id != selectedChannel; else edit" class="mat-caption" matLine>URL: {{ channel.Url }} </span>
+            <ng-template #edit>
+                <div class="container-row content-align-center">
+                    <mat-form-field class="mr-1" matLine appearance="fill" color="primary">
+                        <mat-label>Ingrese la nueva URL</mat-label>
+                        <input type="url" id="channelId" [value]="channel.Url"
+                            (keyup.enter)="onChangeUrl(channel, newUrl)" #newUrl matInput>
+                    </mat-form-field>
+                    <button mat-stroked-button class="mr-1" color="primary" (click)="onChangeUrl(channel, newUrl)">Guardar</button>
+                    <button mat-stroked-button color="warn" (click)="selectedChannel = null">Cancelar</button>
+                </div>
+            </ng-template>
+        </section>
+        <section class="showLgButtons container-row content-align-center">
+            <button class="mr-1" mat-flat-button color="primary" (click)="onEnableEdition(channel.Id)"
+                *ngIf="channel.Id != selectedChannel">Cambiar Url</button>
+            <button class="mr-1" (click)="onRemove(channel.Id)" mat-flat-button color="warn">Eliminar</button>
+            <button mat-stroked-button class="mr-1" (click)="onOpenUrl(i)">Reproducir</button>
+            <mat-checkbox></mat-checkbox>
+        </section>
+        <section class="showMobileMenu">
+            <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="onOpenUrl(i)"><mat-icon>play_arrow</mat-icon>Reproducir</button>
+                <button mat-menu-item *ngIf="channel.Id != selectedChannel" (click)="onEnableEdition(channel.Id)"><mat-icon>edit</mat-icon>Cambiar Url</button>
+                <button mat-menu-item (click)="onRemove(channel.Id)"><mat-icon color="warn">delete</mat-icon>Eliminar</button>
+            </mat-menu>
+        </section>
+    </div>
+</div>

@@ -1,16 +1,20 @@
-.mat-button-config{
-    margin: 1%;
-}
-.mat-input-resize {
-    font-size: 0.8em;
-}
-.playlist-name-style{
-    font-weight: 500 !important;
-}
-.playlist-description {
-    font-weight: lighter !important;
-    font-size: 0.8em !important;
-}
+/*
 input::placeholder {
     color:rgb(100,100,100);
+}*/
+@media screen and (min-width: 1px) {
+    .showMobileMenu {
+        display: inherit;
+    }
+    .showLgButtons{
+        display: none;
+    }
+}
+@media screen and (min-width: 960px) {
+    .showMobileMenu {
+        display: none;
+    }
+    .showLgButtons{
+        display: inherit;
+    }
 }

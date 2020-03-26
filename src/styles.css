@@ -1,8 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { background-color: rgb(30,30,30); margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.pointer {
+    cursor: pointer;
+}
+/* fix overlayContainer background */
+.cdk-overlay-container {
+    background: transparent !important;
+}
+/* CONTAINER */ 
 .container-column{
     display: flex;
     flex-direction: column;
@@ -17,7 +24,13 @@ body { background-color: rgb(30,30,30); margin: 0; font-family: Roboto, "Helveti
 .content-spaced {
     justify-content: space-between;
 }
-
+.content-align-center {
+    align-items: center;
+}
+.content-wrap {
+    flex-wrap: wrap;
+}
+/* ITEM */
 .row-item {
     flex: auto;
 }
@@ -42,9 +55,11 @@ body { background-color: rgb(30,30,30); margin: 0; font-family: Roboto, "Helveti
 .column-item{
     flex: auto;
 }
-
+.full-height{
+    height: 100%;
+}
 /*** STYLES ***/
-/* COLOR */
+/* COLOR */ /*
 .color-200 {
     color: rgb(200,200,200);
 }
@@ -63,18 +78,35 @@ body { background-color: rgb(30,30,30); margin: 0; font-family: Roboto, "Helveti
 }
 .color-50 {
     color: rgb(50,50,50);
-}
-/* BG COLOR */ 
+}*/
+/* BG COLOR */ /*
 .bgdark {
     background-color: rgb(50,50,50);
 }
 .bglight {
     background-color: rgb(100,100,100);
-}
+}*/
 /* TEXT */ 
-.text-size1{
-    font-size: 1em;
+/* Material text 
+.text-hl-5 {
+    font-weight: 400 !important;
+    font-size: 24 !important;
+    letter-spacing: 0 !important;
 }
+.text-hl-6 {
+    font-weight: 500 !important;
+    font-size: 20 !important;
+    letter-spacing: 0.15 !important;
+}
+.text-subtitle-1 {
+    font-size: 16 !important;
+    letter-spacing: 0.15 !important;
+}
+.text-subtitle-2 {
+    font-weight: 500 !important;
+    font-size: 14 !important;
+    letter-spacing: 0.1 !important;
+}*/
 .text-center {
     text-align: center;
 }
@@ -88,10 +120,40 @@ body { background-color: rgb(30,30,30); margin: 0; font-family: Roboto, "Helveti
     font-weight: 600;
 }
 /* MARGIN */
+.m-reset {
+    margin: 0 !important;
+}
 .mt1{
-    margin: 1em 0 0 0;
+    margin: 1em 0 0 0 !important;
+}
+.mt-1 {
+    margin: 1em 0 0 0 !important;
+}
+.mb-1 {
+    margin: 0 0 1em 0 !important;
+}
+.ml-1 {
+    margin: 0 0 0 1em !important;
+}
+.mr-1 {
+    margin: 0 1em 0 0 !important;
 }
 /* PADDING */ 
-.ptb1 {
-    padding: 1em;    
+.pall-1{
+    padding: 1em !important;
+}
+.ptb-1 {
+    padding: 1em 0 !important;    
+}
+.pt-1 {
+    padding: 1em 0 0 0 !important;
+}
+.pr-1 {
+    padding: 0 1em 0 0 !important;
+}
+.pb-1 {
+    padding: 0 0 1em 0 !important;
+}
+.pl-1 {
+    padding: 0 0 0 1em !important;
 }

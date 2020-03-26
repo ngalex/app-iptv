@@ -15,6 +15,7 @@ export class ModIptvListComponent implements OnInit {
   public nameInput: string;
   public enableEdit: boolean; 
   public playlists: Playlist[];
+  public isMobile: boolean;
 
   constructor(private navbarService: NavigatorBarService,
               private plService: PlaylistService,
@@ -30,6 +31,9 @@ export class ModIptvListComponent implements OnInit {
 
   ngOnInit(): void {   console.log("app-iptvlist oninit");
     this.playlists = this.plService.playlistSource;
+    if (window.screen.width <= 360) { // 768px portrait
+      this.isMobile = true;
+    } else this.isMobile = false;
   }
 
   ngOnDestroy(): void {

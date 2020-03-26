@@ -8,12 +8,12 @@ import { ListCreateComponent } from './lists/list-create/list-create.component';
 
 const routes: Routes = [
   {
-    path: 'playlists', component: ModIptvListComponent, children: [
+    path: 'playlists', component: ModIptvListComponent, data: {animation: 'playlists'}, children: [
       { path: 'addPlaylist', component: ListCreateComponent }
     ]
   },
   {
-    path: 'playlists/:id', component: ChannelEditorComponent, children: [
+    path: 'playlists/:id', component: ChannelEditorComponent, data: {animation: 'channels'}, children: [
       { path: 'addChannel', component: ChannelCreateComponent }
     ]
   },

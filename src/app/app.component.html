@@ -1,8 +1,8 @@
-<div class="container-column">
-    <header class = "column-item">
-        <app-mod-header></app-mod-header>
+<div style="background: inherit;" class="container-column">
+    <header class="column-item">
+        <app-mod-header (isDarkTheme)="setTheme($event)"></app-mod-header>
     </header>
-    <div class = "column-item container-row">
+    <div class="column-item container-row">
         <section class="container container-column row-item-60">
             <app-navigator-bar></app-navigator-bar>
             <!--
@@ -18,7 +18,9 @@
                 </ng-template>
             </mat-toolbar>
             -->
-            <router-outlet ></router-outlet>
+            <div [@routeAnimation]="getAnimationData(routerOutlet)">
+                <router-outlet #routerOutlet="outlet"></router-outlet>
+            </div>
             <!--
             <app-mod-iptv-list (enableChannelEditor) = "enableEditChannel = $event" [hidden] = "enableEditChannel"
                                 (enablePlaylistEditor) = "enableEditPlaylist = $event"
@@ -26,11 +28,11 @@
             <app-channel-editor [hidden] = "!enableEditChannel"
                                 ></app-channel-editor>-->
         </section>
-        <aside class = "row-item-40">
+        <aside class="row-item-40 pall-1">
             <app-task-list></app-task-list>
         </aside>
     </div>
-    <footer class = "column-item">
+    <footer class="column-item">
         <app-mod-footer></app-mod-footer>
     </footer>
 </div>
@@ -42,5 +44,3 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-

@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -12,17 +11,44 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$iptv-app-primary: mat-palette($mat-indigo);
-$iptv-app-accent: mat-palette($mat-pink, A200, A100, A400);
+$iptv-app-light-primary: mat-palette($mat-indigo);
+$iptv-app-light-accent: mat-palette($mat-pink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$iptv-app-warn: mat-palette($mat-red);
+$iptv-app-light-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$iptv-app-theme: mat-light-theme($iptv-app-primary, $iptv-app-accent, $iptv-app-warn);
+$iptv-app-dark-primary: mat-palette($mat-light-blue, A700);
+$iptv-app-dark-accent: mat-palette($mat-yellow, A200);
+$iptv-app-dark-warn: mat-palette($mat-red);
+
+$iptv-app-light-theme: mat-light-theme($iptv-app-light-primary, $iptv-app-light-accent, $iptv-app-light-warn);
+$iptv-app-dark-theme: mat-dark-theme($iptv-app-dark-primary, $iptv-app-dark-accent, $iptv-app-dark-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($iptv-app-theme);
 
+@include angular-material-theme($iptv-app-light-theme);
+
+.light-theme {
+  @include angular-material-theme($iptv-app-light-theme);
+  background: #fff;
+  color: #121212;
+}
+
+.dark-theme {
+  @include angular-material-theme($iptv-app-dark-theme);
+  background: #121212;
+  color: #fff;
+}
+
+.bg-primary-light {
+  background-color: mat-color($iptv-app-light-primary);
+  border-color: mat-color($iptv-app-dark-primary, A400);
+}
+
+.bg-primary-dark {
+  background-color: mat-color($iptv-app-dark-primary);
+  border-color: mat-color($iptv-app-dark-primary, A400);
+}

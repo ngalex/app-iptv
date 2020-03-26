@@ -1,19 +1,16 @@
-* {
-    color: #cecece;
+@media screen and (min-width: 1px) {
+    .showMobileMenu {
+        display: inherit;
+    }
+    .showLgButtons{
+        display: none;
+    }
 }
-
-/*** Channel List ***/ 
-.channel-tittle {
-    font-weight: 500;
-    color: #ececec;
-}
-.urlContainer {
-    font-size: 0.8em;
-}
-button.mat-stroked-button,
-button.mat-button {
-     margin: 1%;
-}
-mat-divider{
-    border-top-color: rgb(60, 60, 60);
+@media screen and (min-width: 960px) {
+    .showMobileMenu {
+        display: none;
+    }
+    .showLgButtons{
+        display: inherit;
+    }
 }
