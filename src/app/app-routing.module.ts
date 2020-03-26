@@ -2,7 +2,6 @@ import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ModIptvListComponent } from './lists/mod-iptv-list/mod-iptv-list.component';
 import { ChannelEditorComponent } from './channels/channel-editor/channel-editor.component';
-import { ListEditorComponent } from './lists/list-editor/list-editor.component';
 import { ChannelCreateComponent } from './channels/channel-create/channel-create.component';
 import { ListCreateComponent } from './lists/list-create/list-create.component';
 
