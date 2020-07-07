@@ -34,7 +34,9 @@ export class ChannelEditorComponent implements OnInit {
         this.plService.selectedPlaylist = this.index;
         this.channels = this.chnService.getChannels(this.index);
         this.navbarService.addRoute("/" + this.index);
-        console.log("/id added");
+        //this.navbarService.addRoute("id");
+        console.log("/id added: " + this.index);
+        console.log(this.navbarService.routesStack.length);
         //this.index = this.route.snapshot.params['id'];
       }
     );

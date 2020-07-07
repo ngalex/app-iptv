@@ -14,9 +14,13 @@ import { ListEditorComponent } from './lists/list-editor/list-editor.component';
 import { ListCreateComponent } from './lists/list-create/list-create.component';
 import { ChannelCreateComponent } from './channels/channel-create/channel-create.component';
 import { NavigatorBarComponent } from './lists/navigator-bar/navigator-bar.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
+import { LoginComponent } from './pages/login/login.component';
 
 import { PlaylistService } from './services/playlist/playlist.service';
 import { NavigatorBarService } from './services/navigator-service.service';
+import { ChannelService } from './services/channel/channel.service';
 
 
 //Material
@@ -56,9 +60,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { FormsModule } from '@angular/forms';
-import { ChannelService } from './services/channel/channel.service';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { TaskListComponent } from './components/task-list/task-list.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { TaskListComponent } from './components/task-list/task-list.component';
     ChannelCreateComponent,
     NavigatorBarComponent,
     NotFoundComponent,
-    TaskListComponent
+    TaskListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

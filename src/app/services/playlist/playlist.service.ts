@@ -1,6 +1,5 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Playlist } from 'src/app/models/Playlist';
-import { ChannelService } from '../channel/channel.service';
 
 @Injectable({
   providedIn: 'root'

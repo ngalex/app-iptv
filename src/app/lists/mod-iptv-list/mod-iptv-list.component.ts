@@ -22,10 +22,8 @@ export class ModIptvListComponent implements OnInit {
               private router: Router,
               private _snackBar: MatSnackBar) {
                 this.navbarService.isActivePlaylistsEditor = true;
-                console.log("app-iptvlist constructor");     
-                this.navbarService.clearRoutes();
-                this.navbarService.addRoute("/playlists");
-                console.log("/playlists added"); 
+                console.log("app-iptvlist constructor"); 
+                console.log(this.navbarService.routesStack.length);   
                 
   }
 

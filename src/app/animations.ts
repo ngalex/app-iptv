@@ -32,6 +32,7 @@ import {
       query(':enter', animateChild()),
     ])
   ]);
+
 /*
     export const fadeAnimation = trigger('routeAnimation', [
         transition('heroes => hero', [

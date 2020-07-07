@@ -3,7 +3,7 @@
     <div *ngFor="let channel of this.channels, let i=index" class="container-row content-spaced content-wrap ptb-1">
         <section class="container-column">
             <span class="mat-title m-reset" matLine>Channel {{ channel.Id }} </span>
-            <span *ngIf="channel.Id != selectedChannel; else edit" class="mat-caption" matLine>URL: {{ channel.Url }} </span>
+            <span style="cursor: pointer" *ngIf="channel.Id != selectedChannel; else edit" class="mat-caption" matLine (click)="onEnableEdition(channel.Id)">URL: {{ channel.Url }} </span>
             <ng-template #edit>
                 <div class="container-row content-align-center">
                     <mat-form-field class="mr-1" matLine appearance="fill" color="primary">

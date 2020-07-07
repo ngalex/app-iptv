@@ -19,14 +19,15 @@ export class NavigatorBarComponent implements OnInit {
     private navbarService: NavigatorBarService) {
     this.navbarService.routesTop.subscribe(
       (param: string) => {
-        (this.navbarService.routesStack.length < 2) ? this.isEnabledArrowBack = false : this.isEnabledArrowBack = true;
-        if (this.navbarService.isActivePlaylistsEditor && !this.navbarService.isActiveChannelEditor) {
+        (this.navbarService.routesStack.length > 1)? this.isEnabledArrowBack = true : this.isEnabledArrowBack = false;
+        console.log(this.router.url);
+        if (this.navbarService.routesStack[this.navbarService.routesStack.length-1] === "/playlists") {
           this.isEnabledAddChannel = false;
           this.isEnabledAddPlaylist = true;
           this.isEnabledChannelList = false;
         }
         //no hay otra situacion
-        else {
+        else{
           this.isEnabledAddChannel = true;
           this.isEnabledAddPlaylist = false;
           this.isEnabledChannelList = true;
@@ -36,6 +37,8 @@ export class NavigatorBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.navbarService.addRoute("/playlists");
+    console.log("/playlists added"); 
     console.log("app-navbar oninit");
   }
 

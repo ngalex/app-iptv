@@ -10,7 +10,11 @@ export class NavigatorBarService {
   routesStack: string[]= [];
   routesTop: EventEmitter<string> = new EventEmitter<string>();
   
-  constructor(private router: Router) {console.log("app-navbarservice constructor");
+  constructor(private router: Router) {
+    this.clearRoutes();
+    this.isActivePlaylistsEditor = true;
+    this.isActiveChannelEditor = false;
+    console.log("app-navbarservice constructor");
   }
 
   addRoute(route: string){
@@ -19,18 +23,16 @@ export class NavigatorBarService {
   }
 
   removeRoute():void {
-    //console.log("before:  " + this.toString());
     if (this.routesStack.length > 1) {
       this.routesStack.pop();
-      //console.log("after:  " + this.toString());
       this.routesTop.emit(this.topRoute());
       this.router.navigate([this.toString()]);
     }
-    /*
-    if (this.routesStack.length > 1) {
-      this.routesStack.pop();
-      this.routesTop.emit(this.routesStack[this.routesStack.length-1]);
-    }*/
+  }
+
+  refreshRoute() {
+    this.routesTop.emit(this.topRoute());
+    this.router.navigate([this.toString()]);
   }
 
   topRoute(): string {
@@ -38,7 +40,7 @@ export class NavigatorBarService {
     else return "";
   }
 
-  clearRoutes() {
+  private clearRoutes():void  {
     this.routesStack = [];
   }
 

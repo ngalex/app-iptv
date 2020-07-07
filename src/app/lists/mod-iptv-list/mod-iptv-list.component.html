@@ -3,7 +3,7 @@
     <div *ngFor="let playlist of playlists" class="container-row content-spaced content-wrap ptb-1">
         <section class="container-column">
             <div *ngIf="playlist.Id != selectedPlaylist; else form" class="container-column">
-                <span class="mat-title m-reset">{{playlist.Name}}</span>
+                <span style="cursor: pointer" class="mat-title m-reset" (click)="onEditChannel(playlist)">{{playlist.Name}}</span>
                 <span class="mat-caption"> Cantidad de canales canales:
                     {{playlist.Items}}</span>
             </div>

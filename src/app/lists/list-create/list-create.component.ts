@@ -16,8 +16,8 @@ export class ListCreateComponent implements OnInit {
     private navbarService: NavigatorBarService,
     private plService: PlaylistService,
     private _snackBar: MatSnackBar) {
-    this.navbarService.addRoute("/addPlaylist");
-    console.log("/addPlaylist added");
+    //this.navbarService.addRoute("/addPlaylist");
+    //console.log("/addPlaylist added");
   }
 
   ngOnInit(): void {
@@ -27,12 +27,12 @@ export class ListCreateComponent implements OnInit {
   onCreate(): void {
     this.newPlaylist.Name = this.nameInput;
     this.plService.addPlaylist(this.newPlaylist);
-    this.openSnackBar("Lista creada: " + this.newPlaylist.Name, "Cerrar");
+    this.openSnackBar("Lista creada: " + this.newPlaylist.Name, "Cerrar"); //snackbar
     this.navbarService.removeRoute();
   }
 
   onCancel(): void {
-    this.navbarService.removeRoute();
+    this.navbarService.refreshRoute();
   }
 
   openSnackBar(message: string, action: string) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, destroyPlatform } from '@angular/core';
 import { ChannelService } from 'src/app/services/channel/channel.service';
 import { PlaylistService } from 'src/app/services/playlist/playlist.service';
 import { Playlist } from 'src/app/models/Playlist';
@@ -21,8 +21,8 @@ public urlInput: string;
               private plService: PlaylistService,
               private chnService: ChannelService,
               private _snackBar: MatSnackBar) {
-              this.navbarService.addRoute("/addChannel");
-              console.log("/addChannel added");
+              //this.navbarService.addRoute("/addChannel");
+             //console.log("/addChannel added");
   }
 
   ngOnInit(): void {
@@ -32,8 +32,8 @@ public urlInput: string;
     this.newChannel.IdPlaylist = this.plService.selectedPlaylist;
     this.newChannel.Url = this.urlInput;
     this.chnService.addChannel(this.newChannel);
-    this.openSnackBar("Canal creado (" + this.newChannel.Id + ")", "Cerrar");
-    this.navbarService.removeRoute();
+    this.openSnackBar("Canal creado (" + this.newChannel.Id + ")", "Cerrar"); //snackbar
+    this.navbarService.refreshRoute();
   }
 
   openSnackBar(message: string, action: string) {
@@ -43,7 +43,7 @@ public urlInput: string;
   }
 
   onCancel():void {
-    this.navbarService.removeRoute();
+    this.navbarService.refreshRoute();
   }
 
 }
